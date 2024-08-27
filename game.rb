@@ -29,7 +29,7 @@ class Game
   private
 
   def setup_players(role)
-    if role == "codemaker"
+    if role == 'codemaker'
       @codemaker = Player.new("You", :human)
       @codebreaker = Player.new("Computer", :computer)
     else
@@ -57,9 +57,9 @@ class Game
 
   def end_game_message
     if @codebreaker.has_won?
-      puts "#{@codebreaker.name} has cracked the code! Congratulations!"
+      puts "#{@codebreaker.name} cracked the code! Congratulations!"
     else
-      puts "#{@codemaker.name}'s code remained unbroken!"
+      puts "The code created by #{@codemaker.name} remained unbroken!"
       puts "The code was: #{@code.reveal_code}"
     end
   end

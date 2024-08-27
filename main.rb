@@ -7,6 +7,7 @@ require './feedback.rb'
 class Main
   def self.start
     puts "Welcome to Mastermind!"
+    role = nil
     
     loop do
       puts "Do you want to be the codemaker or the codebreaker? (codemaker/codebreaker)"
