@@ -1,6 +1,7 @@
 class Code
   attr_reader :code
 
+  # Constants to represent the colors that are used within the game
   COLORS = {
     'R' => 'Red',
     'B' => 'Blue',
@@ -10,19 +11,25 @@ class Code
     'P' => 'Purple'
   }
 
+  # Initializes the object for the code so that the game's code will be ready to be stored once it is created
   def initialize
     @code = []
   end
 
+  # Takes the created code and sets it as such in the Code object.
   def set_code(code)
     code = code.join if code.is_a?(Array) # Convert array to string if necessary
     @code = code.upcase.chars
   end
 
+  # Returns a generated code in an array
   def generate_random_code
     @code = Array.new(4) { COLORS.keys.sample }
   end
 
+  # Creates feedback for a specific guess. First copies the code to ensure there are no misleading information in the feedback report
+  # First identifies the letters that are in correct positions, and then looks at letters that are in the wrong position, determining
+  # if they are meant to be in the code but only in the wrong position or if they are incorrect alltogether. 
   def generate_feedback(guess)
     guess = guess.join if guess.is_a?(Array) # Convert array to string if necessary
     feedback = []
@@ -51,6 +58,7 @@ class Code
     feedback
   end
 
+  # Getter for the Code
   def reveal_code
     @code
   end

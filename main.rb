@@ -4,7 +4,8 @@ class Main
   def self.start
     puts "Welcome to Mastermind!"
     role = nil
-    
+
+    # Loops until the user chooses which role they want to play
     loop do
       puts "Do you want to be the codemaker or the codebreaker? (codemaker/codebreaker)"
       role = gets.chomp.downcase
