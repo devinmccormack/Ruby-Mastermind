@@ -2,7 +2,6 @@ require './player.rb'
 require './board.rb'
 require './game.rb'
 require './code.rb'
-require './feedback.rb'
 
 class Main
   def self.start
