@@ -1,28 +1,31 @@
-require './player.rb'
-require './board.rb'
-require './main.rb'
-require './code.rb'
+require_relative 'Player'
+require_relative 'Board'
+require_relative 'Code'
 
 class Game
   def initialize(role)
-    @board = Board.new
-    @code = Code.new
     @codemaker = nil
     @codebreaker = nil
     setup_players(role)
+    @code = Code.new
+    setup_code
+    @board = Board.new(@code)
   end
 
   def play
-    setup_code
+    win = false
 
-    until game_over?
+    until @board.guess_limit_reached? || win == true
       @board.display
       guess = @codebreaker.make_guess
       feedback = @code.generate_feedback(guess)
       @board.store_guess(guess, feedback)
       display_feedback(feedback)
+      if (@board.has_won?(guess))
+        win = true
+        break
+      end
     end
-
     end_game_message
   end
 
@@ -47,20 +50,16 @@ class Game
     end
   end
 
-  def game_over?
-    @board.has_won?(@codebreaker.provide_guess)  || @board.guess_limit_reached?
-  end
-
   def display_feedback(feedback)
     puts "Feedback: #{feedback}"
   end
 
   def end_game_message
-    if @codebreaker.has_won?
-      puts "#{@codebreaker.name} cracked the code! Congratulations!"
-    else
+    if @board.guess_limit_reached?
       puts "The code created by #{@codemaker.name} remained unbroken!"
-      puts "The code was: #{@code.reveal_code}"
+      puts "The code was: #{@code.reveal_code.join}"
+    else
+      puts "#{@codebreaker.name} cracked the code! Congratulations!"
     end
   end
 end

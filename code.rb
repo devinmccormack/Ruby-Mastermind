@@ -1,8 +1,3 @@
-require './player.rb'
-require './board.rb'
-require './game.rb'
-require './main.rb'
-
 class Code
   attr_reader :code
 
@@ -28,20 +23,34 @@ class Code
   end
 
   def generate_feedback(guess)
+    guess = guess.join if guess.is_a?(Array) # Convert array to string if necessary
     feedback = []
+    code_copy = @code.dup # Make a copy to track colors used in feedback
+  
+    # First pass: Identify correct positions
     guess.upcase.chars.each_with_index do |char, index|
-      if char == @code[index]
-        feedback << 'correct'
-      elsif @code.include?(char)
-        feedback << 'wrong position'
-      else
-        feedback << 'incorrect'
+      if char == code_copy[index]
+        feedback[index] = 'correct'
+        code_copy[index] = nil # Remove matched color
       end
     end
+  
+    # Second pass: Identify wrong positions
+    guess.upcase.chars.each_with_index do |char, index|
+      next if feedback[index] == 'correct' # Skip already matched positions
+  
+      if code_copy.include?(char)
+        feedback[index] = 'wrong position'
+        code_copy[code_copy.index(char)] = nil # Remove matched color
+      else
+        feedback[index] = 'incorrect'
+      end
+    end
+  
     feedback
   end
 
   def reveal_code
-    @code.join
+    @code
   end
 end

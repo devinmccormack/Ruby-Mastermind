@@ -1,7 +1,6 @@
-require './main.rb'
-require './board.rb'
-require './game.rb'
-require './code.rb'
+require_relative 'Game'
+require_relative 'Board'
+require_relative 'Code'
 
 class Player
   attr_accessor :name
@@ -16,7 +15,24 @@ class Player
   end
 
   def is_human?
-    @role == 'codemaker' || @role == 'codebreaker'
+    @name == "You"
+  end
+
+  def make_guess
+    if is_human?
+      loop do
+        puts "#{@name}, please enter your guess (e.g., RGBY):"
+        guess = gets.chomp.upcase
+        begin
+          validate_guess(guess)
+          return guess.chars
+        rescue => e
+          puts e.message
+        end
+      end
+    else
+      generate_random_guess
+    end
   end
 
   def set_code(code)
@@ -42,4 +58,9 @@ class Player
       raise "Guess must be exactly #{CODE_LENGTH} characters long."
     end
   end
+
+  def generate_random_guess
+    Array.new(CODE_LENGTH) { VALID_CHARACTERS.sample }
+  end
+  
 end

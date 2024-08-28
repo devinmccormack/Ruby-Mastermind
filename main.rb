@@ -1,7 +1,4 @@
-require './player.rb'
-require './board.rb'
-require './game.rb'
-require './code.rb'
+require_relative 'Game'
 
 class Main
   def self.start

@@ -1,12 +1,11 @@
-require './player.rb'
-require './main.rb'
-require './game.rb'
-require './code.rb'
+require_relative 'Code'
+require_relative 'Game'
 
 class Board
   MAX_GUESSES = 12
 
-  def initialize
+  def initialize(code)
+    @code = code
     @guesses = []
   end
 
@@ -26,6 +25,14 @@ class Board
   end
 
   def has_won?(guess)
-    guess == @code
+    guess_array = convert_to_array(guess)
+    guess_array == @code.reveal_code
+  end
+
+  private
+
+  def convert_to_array(input)
+    return input if input.is_a?(Array) # Return input if already an array
+    input.upcase.chars
   end
 end
