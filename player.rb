@@ -10,6 +10,10 @@ class Player
     @role = role
   end
 
+  def is_human?
+    @role == 'codemaker' || @role == 'codebreaker'
+  end
+
   def set_code(code)
     raise "Only the codemaker can set the code." unless @role == 'codemaker'
     @code = code # This should be handled by Code class

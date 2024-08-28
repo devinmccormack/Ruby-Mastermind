@@ -19,4 +19,8 @@ class Board
   def guess_limit_reached?
     @guesses.length >= MAX_GUESSES
   end
+
+  def has_won?(guess)
+    guess == @code
+  end
 end

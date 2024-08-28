@@ -48,7 +48,7 @@ class Game
   end
 
   def game_over?
-    @codebreaker.has_won? || @board.guess_limit_reached?
+    @board.has_won?(@codebreaker.provide_guess)  || @board.guess_limit_reached?
   end
 
   def display_feedback(feedback)
