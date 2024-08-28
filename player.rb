@@ -1,3 +1,9 @@
+require './main.rb'
+require './board.rb'
+require './game.rb'
+require './code.rb'
+require './feedback.rb'
+
 class Player
   attr_accessor :name
   attr_reader :role

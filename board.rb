@@ -1,3 +1,9 @@
+require './player.rb'
+require './main.rb'
+require './game.rb'
+require './code.rb'
+require './feedback.rb'
+
 class Board
   MAX_GUESSES = 12
 

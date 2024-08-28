@@ -1,3 +1,9 @@
+require './player.rb'
+require './board.rb'
+require './game.rb'
+require './main.rb'
+require './feedback.rb'
+
 class Code
   attr_reader :code
 

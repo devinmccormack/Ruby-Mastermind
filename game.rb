@@ -1,5 +1,6 @@
 require './player.rb'
 require './board.rb'
+require './main.rb'
 require './code.rb'
 require './feedback.rb'
 
