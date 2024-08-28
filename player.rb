@@ -40,6 +40,13 @@ class Player
     @code = code # This should be handled by Code class
   end
 
+  def create_code
+    puts "Please enter the code (e.g., RGBY):"
+    code = gets.chomp.upcase
+    validate_code(code)
+    code.chars
+  end
+
   def provide_guess
     raise "Only the codebreaker can provide a guess." unless @role == 'codebreaker'
     guess = gets.chomp.upcase
@@ -56,6 +63,16 @@ class Player
     end
     unless guess_chars.length == CODE_LENGTH
       raise "Guess must be exactly #{CODE_LENGTH} characters long."
+    end
+  end
+
+  def validate_code(code)
+    code_chars = code.upcase.chars
+    unless code_chars.all? { |char| VALID_CHARACTERS.include?(char) }
+      raise "Code must only include the following characters: #{VALID_CHARACTERS.join(', ')}."
+    end
+    unless code_chars.length == CODE_LENGTH
+      raise "Code must be exactly #{CODE_LENGTH} characters long."
     end
   end
 

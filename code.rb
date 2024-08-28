@@ -15,6 +15,7 @@ class Code
   end
 
   def set_code(code)
+    code = code.join if code.is_a?(Array) # Convert array to string if necessary
     @code = code.upcase.chars
   end
 
